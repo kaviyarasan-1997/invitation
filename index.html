@@ -185,9 +185,10 @@ iframe{
 <section>
 <div class="card">
 <h3>💌 Send Wishes</h3><br>
-<input placeholder="Your Name"><br><br>
-<textarea placeholder="Your Wishes"></textarea><br><br>
-<button class="btn">Send ❤️</button>
+<input id="wishName" placeholder="Your Name"><br><br>
+<textarea id="wishText" placeholder="Your Wishes"></textarea><br><br>
+<button class="btn" onclick="sendWish()">Send ❤️</button>
+<p id="msg"></p>
 </div>
 </section>
 
@@ -265,6 +266,46 @@ setInterval(()=>{
  document.body.appendChild(p);
  setTimeout(()=>p.remove(),10000);
 },300);
+
+  /* 🔹 Firebase Config */
+const firebaseConfig = {
+  apiKey: "AIzaSyBLyf_dz6xPC9wdthZSVtpatkc8JgFhE4Q",
+  authDomain: "chatbox-chats.firebaseapp.com",
+  databaseURL: "https://chatbox-chats-default-rtdb.firebaseio.com",
+  projectId: "chatbox-chats",
+  storageBucket: "chatbox-chats.appspot.com",
+  messagingSenderId: "10200860576",
+  appId: "1:10200860576:android:262315d86f6d1732ddc6c5"
+};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.database();
+
+/* 💌 Send Wish to Firebase */
+function sendWish(){
+  const name=document.getElementById("wishName").value.trim();
+  const text=document.getElementById("wishText").value.trim();
+  const msg=document.getElementById("msg");
+
+  if(!name || !text){
+    alert("Name & Wishes required ❤️");
+    return;
+  }
+
+  const wishData={
+    name:name,
+    wish:text,
+    time:new Date().toLocaleString()
+  };
+
+  const newWishKey=db.ref('wishes').push().key;
+  let updates={};
+  updates['/wishes/'+newWishKey]=wishData;
+  db.ref().update(updates).then(()=>{
+    msg.innerText="❤️ Wish Sent Successfully";
+    document.getElementById("wishName").value="";
+    document.getElementById("wishText").value="";
+  });
+}
 </script>
 
 </body>
