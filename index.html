@@ -80,6 +80,38 @@ iframe{width:100%;height:250px;border-radius:15px;border:0;}
 #countdown{font-size:16px;margin:10px 0;font-weight:600;}
 input,textarea{width:100%;padding:10px;border-radius:12px;border:none;outline:none;}
 #msg{margin-top:10px;font-weight:600;color:green;}
+
+/* Floating image */
+.floating-img{
+  animation: floatImg 4s ease-in-out infinite;
+}
+@keyframes floatImg{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+  100%{transform:translateY(0);}
+}
+
+/* Blossom flowers under image */
+.blossoms{
+  position:absolute;
+  top:190px;
+  width:100%;
+  pointer-events:none;
+}
+.blossoms span{
+  position:absolute;
+  font-size:22px;
+  animation: blossomFloat 3s ease-in-out infinite;
+}
+.blossoms span:nth-child(1){left:30%;animation-delay:0s;}
+.blossoms span:nth-child(2){left:50%;animation-delay:1s;}
+.blossoms span:nth-child(3){left:70%;animation-delay:2s;}
+
+@keyframes blossomFloat{
+  0%{transform:translateY(0);opacity:0;}
+  50%{opacity:1;}
+  100%{transform:translateY(-25px);opacity:0;}
+}
 </style>
 
 <!-- Firebase SDK -->
@@ -96,7 +128,12 @@ input,textarea{width:100%;padding:10px;border-radius:12px;border:none;outline:no
 <!-- CARD 1 -->
 <section>
 <div class="card">
-<img src="assist/frame.png" width="220"><br>
+  <img src="assist/frame.png" width="220" class="floating-img"><br>
+  <div class="blossoms">
+  <span>🌸</span>
+  <span>🌺</span>
+  <span>🌸</span>
+  </div>
 <div class="name">Kaviyarasan</div>
 <div class="heart">❤️</div>
 <div class="name">Monnika</div>
