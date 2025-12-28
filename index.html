@@ -1,230 +1,270 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 <head>
 <meta charset="UTF-8">
-<title>Kaviyarasan ❤️ Monnika | Wedding Invitation</title>
+<title>Kaviyarasan ❤️ Monnika</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --bg:#f7b7a3;
+  --accent:#b03045;
+}
+
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
+  font-family:Poppins,sans-serif;
+  background:var(--bg);
+  transition:.6s;
+  overflow-x:hidden;
+}
+
+/* 🌸 Floating Hearts & Flowers */
+.particle{
+  position:fixed;
+  top:-50px;
+  font-size:20px;
+  animation:fall linear infinite;
+  opacity:.7;
+  pointer-events:none;
+}
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* Sections */
+section{
   min-height:100vh;
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffd194);
   display:flex;
   justify-content:center;
   align-items:center;
-  overflow:hidden;
+  padding:20px;
 }
 
-/* 🌸 Decorative Frame */
-.frame{
-  position:fixed;
-  inset:0;
-  background:url("frame.png") center/cover no-repeat;
-  z-index:5;
-  pointer-events:none;
-}
-
-/* Main Card */
-.invitation{
-  width:92%;
-  max-width:430px;
-  background:rgba(255,255,255,0.22);
+.card{
+  width:100%;
+  max-width:420px;
+  background:#ffffff55;
   backdrop-filter:blur(18px);
-  border-radius:30px;
-  padding:28px 20px;
+  border-radius:25px;
+  padding:25px;
   text-align:center;
-  color:#fff;
-  box-shadow:0 35px 80px rgba(0,0,0,0.45);
-  z-index:2;
-}
-
-/* Couple PNG Together */
-.couple-wrap{
-  margin-bottom:8px;
-}
-.couple-wrap img{
-  width:210px;
-  max-width:90%;
-  animation:float 3s ease-in-out infinite;
-  filter:drop-shadow(0 0 22px rgba(255,255,255,0.8));
-}
-
-/* Text Styles */
-.title{
-  font-size:13px;
-  letter-spacing:4px;
+  box-shadow:0 0 30px #00000055;
 }
 
 .name{
-  font-family:'Great Vibes',cursive;
-  font-size:clamp(40px,8vw,56px);
+  font-family:"Great Vibes";
+  font-size:52px;
+  color:var(--accent);
+}
+.heart{font-size:26px;}
+
+.btn{
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  padding:10px 16px;
+  border-radius:25px;
+  cursor:pointer;
+  margin:5px;
 }
 
-.heart{
-  font-size:30px;
-  animation:beat 1.3s infinite;
-}
-
-.names{
-  font-weight:700;
-  letter-spacing:2px;
-  margin-top:6px;
-}
-
-.text{
-  font-size:15px;
-  margin-top:12px;
-  line-height:1.7;
-}
-
-.date{
-  margin-top:14px;
-  font-size:16px;
-  color:#ffeaa7;
-}
-
-.countdown{
+/* Theme box */
+.theme-box{
+  display:none;
   margin-top:10px;
-  font-size:15px;
-  font-weight:500;
+  background:#fff;
+  border-radius:15px;
+  padding:10px;
+}
+.theme-box button{width:100%;}
+
+/* Gallery */
+.gallery{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+}
+.gallery img{
+  width:100%;
+  border-radius:15px;
 }
 
-/* Tap hint */
-.tap-hint{
+/* Footer scroll */
+.footer-nav{
   position:fixed;
   bottom:20px;
-  background:rgba(0,0,0,0.5);
-  color:#fff;
-  padding:8px 16px;
-  border-radius:20px;
-  font-size:13px;
-  z-index:10;
-  animation:pulse 1.5s infinite;
+  left:50%;
+  transform:translateX(-50%);
+  opacity:0;
+  transition:.4s;
+}
+.footer-nav.show{opacity:1;}
+.footer-nav button{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  font-size:22px;
 }
 
-/* Floating particles */
-.float{
-  position:absolute;
-  bottom:-40px;
-  pointer-events:none;
-  animation:floatUp linear infinite;
+/* Map */
+iframe{
+  width:100%;
+  height:250px;
+  border-radius:15px;
+  border:0;
 }
 
-/* Animations */
-@keyframes beat{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.4);}
-}
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
-}
-@keyframes floatUp{
-  from{transform:translateY(0);opacity:1;}
-  to{transform:translateY(-120vh);opacity:0;}
-}
-@keyframes pulse{
-  0%,100%{opacity:1;}
-  50%{opacity:0.5;}
+/* Countdown */
+#countdown{
+  font-size:16px;
+  margin:10px 0;
+  font-weight:600;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Decorative Frame -->
-<div class="frame"></div>
-
-<!-- Tap Hint -->
-<div class="tap-hint" id="tapHint">Tap anywhere for music 🎶</div>
-
-<div class="invitation">
-
-  <!-- Couple Together PNG -->
-  <div class="couple-wrap">
-    <img src="assist/frame.png" alt="Couple">
-  </div>
-
-  <div class="title">WEDDING INVITATION</div>
-
-  <div class="name">Kaviyarasan</div>
-  <div class="heart">❤️</div>
-  <div class="name">Monnika</div>
-
-  <div class="names">KAVIYARASAN & MONNIKA</div>
-
-  <div class="text">
-    Together with our families,<br>
-    we invite you to celebrate<br>
-    the union of our hearts.
-  </div>
-
-  <div class="date">
-    💍 Save the Date 💍<br>
-    March 25, 2026
-  </div>
-
-  <div class="countdown" id="countdown"></div>
+<div class="footer-nav" id="footer">
+  <button class="btn" onclick="next()">⬇</button>
 </div>
 
-<!-- 🎵 Background Music (GitHub Pages SAFE) -->
-<audio id="bgMusic" loop muted autoplay>
-  <source src="assist/music.mp3" type="audio/mpeg">
-</audio>
+<!-- CARD 1 -->
+<section>
+<div class="card">
+<img src="couple.png" width="220"><br>
+
+<div class="name">Kaviyarasan</div>
+<div class="heart">❤️</div>
+<div class="name">Monnika</div>
+
+<p>💍 25 March 2026</p>
+<div id="countdown"></div>
+
+<button class="btn" onclick="share()">📤 Share</button>
+
+<button class="btn" onclick="toggleThemes()">🎨 Theme</button>
+<div class="theme-box" id="themes">
+  <button class="btn" onclick="theme(0)">Tamil</button>
+  <button class="btn" onclick="theme(1)">North</button>
+  <button class="btn" onclick="theme(2)">Trending</button>
+  <button class="btn" onclick="theme(3)">Royal</button>
+  <button class="btn" onclick="theme(4)">Classic</button>
+</div>
+</div>
+</section>
+
+<!-- CARD 2 -->
+<section>
+<div class="card">
+<h3>📍 Venue</h3><br>
+<iframe src="https://www.google.com/maps?q=Mayiladuthurai&output=embed"></iframe>
+</div>
+</section>
+
+<!-- CARD 3 -->
+<section>
+<div class="card">
+<h3>📸 Engagement Moments</h3><br>
+<div class="gallery">
+<img src="g1.jpg">
+<img src="g2.jpg">
+<img src="g3.jpg">
+</div>
+</div>
+</section>
+
+<!-- CARD 4 -->
+<section>
+<div class="card">
+<h3>💌 Send Wishes</h3><br>
+<input placeholder="Your Name"><br><br>
+<textarea placeholder="Your Wishes"></textarea><br><br>
+<button class="btn">Send ❤️</button>
+</div>
+</section>
+
+<audio id="music" src="music.mp3" loop autoplay muted></audio>
 
 <script>
-/* 🎵 Enable Music on First User Interaction */
-const music = document.getElementById("bgMusic");
-const hint = document.getElementById("tapHint");
+/* 🎵 Music */
+const music=document.getElementById("music");
+document.addEventListener("click",()=>{
+ music.muted=false; music.play();
+},{once:true});
 
-function enableMusic(){
-  music.muted = false;
-  music.play().catch(()=>{});
-  hint.style.display="none";
-  document.removeEventListener("touchstart", enableMusic);
-  document.removeEventListener("click", enableMusic);
-}
-document.addEventListener("touchstart", enableMusic);
-document.addEventListener("click", enableMusic);
-
-/* ⏳ Countdown */
-const weddingDate = new Date(2026,2,25,6,0,0).getTime();
+/* ⏳ Countdown with seconds */
+const wedding=new Date("March 25, 2026 06:00:00").getTime();
 setInterval(()=>{
-  const now = Date.now();
-  const diff = weddingDate - now;
-  const cd = document.getElementById("countdown");
-
-  if(diff <= 0){
-    cd.innerHTML="💍 Today is the Big Day 💍";
-    return;
-  }
-
-  const d=Math.floor(diff/(1000*60*60*24));
-  const h=Math.floor((diff/(1000*60*60))%24);
-  const m=Math.floor((diff/(1000*60))%60);
-  const s=Math.floor((diff/1000)%60);
-
-  cd.innerHTML=`⏳ ${d} Days ${h} Hrs ${m} Min ${s} Sec`;
+ let d=wedding-Date.now();
+ if(d<0){countdown.innerText="💍 Today";return;}
+ let days=Math.floor(d/86400000);
+ let hrs=Math.floor((d%86400000)/3600000);
+ let mins=Math.floor((d%3600000)/60000);
+ let secs=Math.floor((d%60000)/1000);
+ countdown.innerText=
+ `${days} Days ${hrs}h ${mins}m ${secs}s`;
 },1000);
 
-/* ✨ Floating Effects */
-const icons=["✨","❤️","🌸","💖","💫"];
+/* Scroll */
+function next(){
+ scrollBy({top:innerHeight,behavior:"smooth"});
+}
+
+/* Share */
+function share(){
+ navigator.share?
+ navigator.share({title:"Wedding",url:location.href}):
+ window.open("https://wa.me/?text="+location.href);
+}
+
+/* Themes */
+function theme(i){
+ const t=[
+  ["#f7b7a3","#b03045"],
+  ["#ffecd2","#b23a48"],
+  ["#e2ebf0","#0077b6"],
+  ["#1c1c1c","#ffd700"],
+  ["#ffdde1","#d6336c"]
+ ];
+ document.documentElement.style.setProperty("--bg",t[i][0]);
+ document.documentElement.style.setProperty("--accent",t[i][1]);
+}
+
+/* Theme toggle */
+function toggleThemes(){
+ const t=document.getElementById("themes");
+ t.style.display=t.style.display=="block"?"none":"block";
+}
+
+/* Footer auto hide */
+let timer;
+function showUI(){
+ footer.classList.add("show");
+ clearTimeout(timer);
+ timer=setTimeout(()=>footer.classList.remove("show"),5000);
+}
+addEventListener("scroll",showUI);
+addEventListener("click",showUI);
+
+/* 🌸 Hearts & Flowers Generator */
+const icons=["❤️","🌸","💮","🌺"];
 setInterval(()=>{
-  const el=document.createElement("div");
-  el.className="float";
-  el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
-  el.style.left=Math.random()*100+"vw";
-  el.style.fontSize=(16+Math.random()*20)+"px";
-  el.style.animationDuration=(5+Math.random()*5)+"s";
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),9000);
-},450);
+ let p=document.createElement("div");
+ p.className="particle";
+ p.innerText=icons[Math.floor(Math.random()*icons.length)];
+ p.style.left=Math.random()*100+"vw";
+ p.style.animationDuration=5+Math.random()*5+"s";
+ document.body.appendChild(p);
+ setTimeout(()=>p.remove(),10000);
+},300);
 </script>
 
 </body>
