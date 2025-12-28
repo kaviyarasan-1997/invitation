@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<title>Wishes Viewer - Kaviyarasan ❤️ Monnika</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Poppins,sans-serif;background:#f7b7a3;margin:0;padding:0;}
+.container{max-width:480px;margin:0 auto;padding:20px;}
+.wish-card{background:#ffffffaa;padding:15px;margin:15px 0;border-radius:15px;box-shadow:0 0 15px #00000033;}
+.wish-card h4{margin:0 0 5px 0;color:#b03045;}
+.wish-card p{margin:0;font-size:14px;}
+.wish-card small{color:#333;}
+.delete-btn{background:red;color:#fff;border:none;padding:5px 10px;border-radius:8px;cursor:pointer;margin-top:5px;}
+</style>
+</head>
+<body>
+
+<div class="container" id="wishesContainer">
+<h2>💌 Sent Wishes</h2>
+<div id="wishList"></div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+// Firebase config (same as first website)
+const firebaseConfig = {
+  apiKey: "AIzaSyBLyf_dz6xPC9wdthZSVtpatkc8JgFhE4Q",
+  authDomain: "chatbox-chats.firebaseapp.com",
+  databaseURL: "https://chatbox-chats-default-rtdb.firebaseio.com",
+  projectId: "chatbox-chats",
+  storageBucket: "chatbox-chats.appspot.com",
+  messagingSenderId: "10200860576",
+  appId: "1:10200860576:android:262315d86f6d1732ddc6c5"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const container = document.getElementById("wishList");
+
+// Listen real-time updates from Realtime Database
+db.ref('wishes').on('value', snapshot => {
+  container.innerHTML = "";
+  const wishes = snapshot.val();
+  if(!wishes) return;
+
+  Object.keys(wishes).forEach(key => {
+    const data = wishes[key];
+    const div = document.createElement("div");
+    div.className = "wish-card";
+    div.innerHTML = `
+      <h4>${data.name}</h4>
+      <p>${data.wish}</p>
+      <small>${data.time}</small><br>
+      <button class="delete-btn" onclick="deleteWish('${key}')">Delete</button>
+    `;
+    container.appendChild(div);
+  });
+
+  // Scroll to last wish
+  if(container.lastChild){
+    container.lastChild.scrollIntoView({behavior:"smooth"});
+  }
+});
+
+// Delete wish function
+function deleteWish(key){
+  if(confirm("Are you sure you want to delete this wish?")){
+    db.ref('wishes/' + key).remove();
+  }
+}
+</script>
+
+</body>
+</html>
