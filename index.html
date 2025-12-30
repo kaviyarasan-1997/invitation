@@ -213,9 +213,47 @@ setInterval(()=>{
 /* Scroll */
 function next(){ scrollBy({top:innerHeight,behavior:"smooth"}); }
 
-/* Share */
+/*
 function share(){ navigator.share?navigator.share({title:"Wedding",url:location.href}):window.open("https://wa.me/?text="+location.href); }
 
+/* --- 🌟 ENHANCED SHARE FUNCTION 🌟 --- */
+const weddingQuotes = [
+  "A successful marriage requires falling in love many times, always with the same person. ❤️",
+  "Together is a beautiful place to be. Join us on our special day! 💍",
+  "Two hearts, one soul, one beautiful journey beginning... ✨",
+  "Love is not just looking at each other, it's looking in the same direction. 🕊️",
+  "Hand in hand, heart to heart, on this day our adventure starts! 🌸",
+  "Life is better with a best friend. So I married mine. 🥂"
+];
+
+async function share() {
+  const randomQuote = weddingQuotes[Math.floor(Math.random() * weddingQuotes.length)];
+  const shareText = `💍 Wedding Invitation: Kaviyarasan ❤️ Monnika\n\n` +
+                    `✨ "${randomQuote}"\n\n` +
+                    `📅 Date: 25 March 2026\n` +
+                    `📍 Venue: Karthick Marriage Hall, Pudukkottai\n` +
+                    `🗺️ Map: https://goo.gl/maps/QBMgCm43CXrC8JUW7\n\n` +
+                    `View our full invitation here:`;
+  
+  const shareUrl = window.location.href;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: "Kaviyarasan ❤️ Monnika Wedding",
+        text: shareText,
+        url: shareUrl,
+      });
+    } catch (err) {
+      console.log("Share failed:", err);
+    }
+  } else {
+    // Desktop Fallback to WhatsApp
+    const waUrl = `https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`;
+    window.open(waUrl, '_blank');
+  }
+}
+  
 /* Themes */
 function theme(i){
  const t=[["#f7b7a3","#b03045"],["#ffecd2","#b23a48"],["#e2ebf0","#0077b6"],["#1c1c1c","#ffd700"],["#ffdde1","#d6336c"]];
